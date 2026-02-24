@@ -71,9 +71,18 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
 
         key = (neighbourhood_group, room_type)
 
-        price_sums[key] = 
+        if key in price_sums:
+            price_sums[key] += price
+            price_counts[key] += 1
+        else:
+            price_sums[key] = price
+            price_counts[key] = 1
 
+    avg_prices = {}
+    for key in price_sums:
+        avg_prices[key] = price_sums[key] / price_counts[key]
 
+    return avg_prices
 
 ###############################################################################
 ##### TASK 3: CSV WRITER
